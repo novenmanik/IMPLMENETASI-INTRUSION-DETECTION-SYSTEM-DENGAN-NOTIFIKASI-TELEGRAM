@@ -1,5 +1,0 @@
-alert icmp any any  -> $HOME_NET (msg:"ADA PERCOBAAN PING"; gid:1; sid:1000001; rev:001; classtype:icmp-event;)
-alert udp $EXTERNAL_NET any -> $HOME_NET any (msg:"ADA SERANGAN UDP TERDETEKSI"; detection filter:track by_dst, count 1000, seconds1; sid:1000002; rev:002;)
-alert tcpany any -> 192.168.1.121 23 (msg"ADA YANG MENCOBA TELNET"; sid:1000003; rev:003;)
-alert tcp $EXTERNAL_NET any -> $HOME_NET 22 (msg:"ADA YANG MENCOBA SSH"; sid:1000004; rev:004;)
-alert icmp any any -> $HOME_NET any (msg:"PING of DEATH"; dsize:>1000; sid:1000005; rev:005;)
