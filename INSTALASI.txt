@@ -1,0 +1,78 @@
+(INSTALASI)
+apt-get install -y openssh-server
+reboot
+apt-get install -y build-essential
+apt-get install -y libpcap-dev libpcre3-dev libdumbnet-dev
+apt-get install -y bison flex
+mkdir ~/snort_src
+cd ~/snort_src
+wget https://snort.org/downloads/snort/daq-2.0.7.tar.gz
+tar -xvzf daq-2.0.7.tar.gz
+cd daq-2.0.7
+./condigure
+make
+make install
+apt-get install -y zlib1g-dev liblzma-dev openssl libssl-dev
+cd ..
+wget https://snort.org/downloads/snort/snort-2.9.20.tar.gz
+tar -xvzf snort-2.9.20.tar.gz
+cd snort-2.9.20
+./configure --enable-sourcefire
+
+(download luajit sebelum lanjut)
+cd Downloads
+tar zxf LuaJIT 2.0.5.tar.gz
+cd LuaJIT 2.0.5
+make
+sudo make install
+------------------
+make
+make install
+ldconfig
+ln -s /usr/local/bin/snort /usr/sbin/snort
+snort -V
+
+
+groupadd snort
+useradd snort -r -s /sbin/nologin -c SNORT_IDS -g snort
+mkdir /etc/snort
+mkdir /etc/snort/rules
+mkdir /etc/snort/rules/iplists
+mkdir /etc/snort/preproc_rules
+mkdir /usr/local/lib/snort_dynamicrules
+mkdir /etc/snort/so_rules
+touch /etc/snort/rules/iplists/black_list.rules
+touch /etc/snort/rules/iplists/white_list.rules
+touch /etc/snort/rules/local.rules
+touch /etc/snort/sid-msg.map
+mkdir /var/log/snort
+mkdir /var/log/snort/archived_logs
+chmod -R 5775 /etc/snort
+chmod -R 5775 /var/log/snort
+chmod -R 5775 /var/log/snort/archived_logs
+chmod -R 5775 /etc/snort/so_rules
+chmod -R 5775 /usr/local/lib/snort_dynamicrules
+chown -R snort:snort /etc/snort
+chown -R snort:snort /var/log/snort
+chown -r snort:snort /usr/local/lib/snort_dynamicrules
+
+wget https://gtithub.com/firnsy/barnyard2/archive/master.tar.gz -O barnyard2-Master.tar.gz
+tar zxvf barnyard2-Master.tar.gz
+autoreconf -fvi ./m4
+apt-get install -y mysql-server libmysqlclient-dev mysql-client autoconf libtool
+ln -s /usr.include/dumbnet.h /usr/include/dnet.h
+ldconfig
+configure --with -mysql-libraries=/usr/lib/x86-linux-gnu
+make
+make install
+
+add-apt-repository ppa:ondrej/php
+apt-get  install -y apache2 libapache2-mod-php5.6 php5.6 php5.6-cli php5.6 php5.6common php5.6-gd php-pear php5.6-xml
+wget https://sourceforge.dnet/projects/adodb/files/adodb-php5-only/adodb-520-for-php5/adodb-5.20.8.tar.gz
+tar -xvzf adodb-5.20.8.tar.gz
+mv adodb /var/adodb
+chmod -R 755 /var/adodb
+wget https://sourceforge.net/projects/secureideas/files/BASE/base-1.4.5/base-1.4.5.tar.gz
+tarxvzf base-1.4.5.tar.gz
+mv base-1.4.5 /var/www/html/base
+service apache2 restart
