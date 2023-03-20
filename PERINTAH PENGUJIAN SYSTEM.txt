@@ -1,0 +1,5 @@
+PING : ping 192.168.1.121
+UDP FLOOD: hping3 --udp --flood -p 8 192.168.1.121
+SSH : ssh (nama tujuan)@192.168.1.121
+TELNET : telnet 1921.68.1.121
+POD : ping 192.168.1.121 -s 2000 -t -n 1
